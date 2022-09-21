@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars", "CelsoGuitars\CelsoGuitars.csproj", "{43F37123-EECD-4ED5-8A7A-37B1E62572C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars.API", "CelsoGuitars.API\CelsoGuitars.API.csproj", "{A5A47533-750A-401D-A0A9-430EA8CC46EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars.Application", "CelsoGuitars.Application\CelsoGuitars.Application.csproj", "{008A4A7F-593D-47AB-A913-DBB0A5BF4C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars.Domain", "CelsoGuitars.Domain\CelsoGuitars.Domain.csproj", "{FDE86675-DCF9-4FE8-91C0-2427E85B8470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars.Infra", "CelsoGuitars.Infra\CelsoGuitars.Infra.csproj", "{00E0C1B7-F984-45CF-9DE1-2E4BB3DA6C00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelsoGuitars.Repository", "CelsoGuitars.Repository\CelsoGuitars.Repository.csproj", "{188FC71A-44AF-4287-AC4E-29469645C837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{43F37123-EECD-4ED5-8A7A-37B1E62572C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43F37123-EECD-4ED5-8A7A-37B1E62572C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43F37123-EECD-4ED5-8A7A-37B1E62572C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43F37123-EECD-4ED5-8A7A-37B1E62572C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A47533-750A-401D-A0A9-430EA8CC46EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A47533-750A-401D-A0A9-430EA8CC46EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A47533-750A-401D-A0A9-430EA8CC46EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A47533-750A-401D-A0A9-430EA8CC46EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008A4A7F-593D-47AB-A913-DBB0A5BF4C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008A4A7F-593D-47AB-A913-DBB0A5BF4C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008A4A7F-593D-47AB-A913-DBB0A5BF4C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008A4A7F-593D-47AB-A913-DBB0A5BF4C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE86675-DCF9-4FE8-91C0-2427E85B8470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE86675-DCF9-4FE8-91C0-2427E85B8470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE86675-DCF9-4FE8-91C0-2427E85B8470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE86675-DCF9-4FE8-91C0-2427E85B8470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E0C1B7-F984-45CF-9DE1-2E4BB3DA6C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E0C1B7-F984-45CF-9DE1-2E4BB3DA6C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E0C1B7-F984-45CF-9DE1-2E4BB3DA6C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E0C1B7-F984-45CF-9DE1-2E4BB3DA6C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188FC71A-44AF-4287-AC4E-29469645C837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188FC71A-44AF-4287-AC4E-29469645C837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188FC71A-44AF-4287-AC4E-29469645C837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188FC71A-44AF-4287-AC4E-29469645C837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
