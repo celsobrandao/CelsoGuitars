@@ -15,7 +15,7 @@ namespace CelsoGuitars.Domain.Servico
         public List<TipoServico> TiposServicos { get; set; }
         public decimal ValorPrevisto { get; set; }
         public decimal PercentualDesconto { get; set; }
-        public decimal ValorEfetivo { get; set; }
+        public decimal? ValorEfetivo { get; set; }
         public string Observacoes { get; set; }
 
         public void Calcular()
