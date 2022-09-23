@@ -68,7 +68,7 @@ namespace CelsoGuitars.API.Controllers.Cliente
             return Ok(await _mediator.Send(new GetAllClienteQuery()));
         }
 
-        [HttpPost]
+        [HttpPost, Route("Criar"), AllowAnonymous]
         public async Task<IActionResult> Criar(ClienteInputDTO dto)
         {
             var result = await _mediator.Send(new CriarClienteCommand(dto));
