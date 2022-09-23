@@ -1,4 +1,6 @@
 ﻿using CelsoGuitars.Domain.Guitarra.Parte;
+using CelsoGuitars.Domain.Guitarra.Rules;
+using FluentValidation;
 
 namespace CelsoGuitars.Domain.Guitarra
 {
@@ -26,5 +28,7 @@ namespace CelsoGuitars.Domain.Guitarra
         public Tarraxa Tarraxa { get; set; }
         public Traste Traste { get; set; }
         public string Foto { get; set; }
+
+        public void Validar() => new ValidadorGuitarra().ValidateAndThrow(this);
     }
 }

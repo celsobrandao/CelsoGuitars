@@ -1,4 +1,6 @@
-﻿using CelsoGuitars.Infra.Entidade;
+﻿using CelsoGuitars.Domain.Servico.Rules;
+using CelsoGuitars.Infra.Entidade;
+using FluentValidation;
 
 namespace CelsoGuitars.Domain.Servico
 {
@@ -10,5 +12,7 @@ namespace CelsoGuitars.Domain.Servico
         public int MinutosExecucao { get; set; }
 
         public List<OrdemServico> OrdensServicos { get; set; }
+
+        public void Validar() => new ValidadorTipoServico().ValidateAndThrow(this);
     }
 }
