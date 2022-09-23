@@ -23,7 +23,8 @@ namespace CelsoGuitars.Repository.Mapping.Servico
                 .HasMaxLength(4000);
 
             builder.Property(x => x.Valor)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.MinutosExecucao)
                 .IsRequired();

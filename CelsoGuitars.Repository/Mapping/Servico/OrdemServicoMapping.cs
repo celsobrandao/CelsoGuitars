@@ -28,19 +28,23 @@ namespace CelsoGuitars.Repository.Mapping.Servico
 
             builder.HasOne(x => x.Guitarra)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.TiposServicos)
                 .WithMany(x => x.OrdensServicos);
 
             builder.Property(x => x.ValorPrevisto)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.PercentualDesconto)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(4);
 
             builder.Property(x => x.ValorEfetivo)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.Observacoes)
                 .HasMaxLength(4000);

@@ -22,7 +22,8 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
                 .HasMaxLength(100);
 
             builder.Property(x => x.Resistencia)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.CorCaptador)
                 .IsRequired();
@@ -32,7 +33,8 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.HasOne(x => x.Marca)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Nome)
                 .IsRequired()

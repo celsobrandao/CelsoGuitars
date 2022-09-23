@@ -17,11 +17,13 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra
 
             builder.HasOne(x => x.Braco)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Corpo)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.ConfiguracaoCaptadores)
                 .IsRequired();
@@ -37,19 +39,38 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra
 
             builder.HasOne(x => x.Ponte)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Tarraxa)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Traste)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Foto)
                 .IsRequired()
                 .HasMaxLength(500);
+
+            builder.HasOne(x => x.Marca)
+                .WithMany()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(x => x.Nome)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            builder.Property(x => x.Descricao)
+                .HasMaxLength(4000);
+
+            builder.Property(x => x.CodigoFabricante)
+                .IsRequired()
+                .HasMaxLength(200);
         }
     }
 }

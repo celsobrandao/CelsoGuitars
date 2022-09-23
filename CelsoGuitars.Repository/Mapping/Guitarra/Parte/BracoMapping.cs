@@ -17,14 +17,17 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.HasOne(x => x.MadeiraBraco)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.MadeiraEscala)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.ComprimentoEscala)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.QuantidadeTrastes)
                 .IsRequired();
@@ -36,7 +39,8 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
                 .HasMaxLength(100);
 
             builder.Property(x => x.RaioEscala)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(2);
 
             builder.Property(x => x.JuncaoBraco)
                 .IsRequired();
@@ -46,7 +50,8 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.HasOne(x => x.Marca)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Nome)
                 .IsRequired()

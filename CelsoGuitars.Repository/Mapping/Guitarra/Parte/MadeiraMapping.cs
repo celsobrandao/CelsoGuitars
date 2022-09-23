@@ -17,7 +17,8 @@ namespace CelsoGuitars.Repository.Mapping.Parte
 
             builder.HasOne(x => x.Marca)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Nome)
                 .IsRequired()
