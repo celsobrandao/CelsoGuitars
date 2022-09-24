@@ -1,4 +1,4 @@
-﻿namespace CelsoGuitars.Domain.Cliente.ValueObject
+﻿namespace CelsoGuitars.Domain.Usuario.ValueObject
 {
     public class Senha
     {

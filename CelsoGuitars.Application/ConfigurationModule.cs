@@ -6,6 +6,8 @@ using CelsoGuitars.Application.Guitarra.Service;
 using CelsoGuitars.Application.Guitarra.Service.Interfaces;
 using CelsoGuitars.Application.Servico.Service;
 using CelsoGuitars.Application.Servico.Service.Interfaces;
+using CelsoGuitars.Application.Usuario.Service;
+using CelsoGuitars.Application.Usuario.Service.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,6 +36,10 @@ namespace CelsoGuitars.Application
             #region Serviço
             services.AddScoped<IOrdemServicoService, OrdemServicoService>();
             services.AddScoped<ITipoServicoService, TipoServicoService>();
+            #endregion
+
+            #region Usuário
+            services.AddScoped<IUsuarioService, UsuarioService>();
             #endregion
 
             return services;

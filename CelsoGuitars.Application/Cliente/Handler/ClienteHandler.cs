@@ -5,8 +5,7 @@ using MediatR;
 
 namespace CelsoGuitars.Application.Cliente.Handler
 {
-    public class ClienteHandler : IRequestHandler<ValidarLoginClienteCommand, ValidarLoginClienteCommandResponse>,
-                                  IRequestHandler<CriarClienteCommand, CriarClienteCommandResponse>,
+    public class ClienteHandler : IRequestHandler<CriarClienteCommand, CriarClienteCommandResponse>,
                                   IRequestHandler<AtualizarClienteCommand, AtualizarClienteCommandResponse>,
                                   IRequestHandler<RemoverClienteCommand, RemoverClienteCommandResponse>,
                                   IRequestHandler<GetAllClienteQuery, GetAllClienteQueryResponse>
@@ -16,13 +15,6 @@ namespace CelsoGuitars.Application.Cliente.Handler
         public ClienteHandler(IClienteService clienteService)
         {
             _clienteService = clienteService;
-        }
-
-        public async Task<ValidarLoginClienteCommandResponse> Handle(ValidarLoginClienteCommand request, CancellationToken cancellationToken)
-        {
-            var result = await _clienteService.ValidarLogin(request.Cliente);
-
-            return new ValidarLoginClienteCommandResponse(result);
         }
 
         public async Task<CriarClienteCommandResponse> Handle(CriarClienteCommand request, CancellationToken cancellationToken)

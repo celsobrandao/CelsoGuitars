@@ -3,26 +3,6 @@ using MediatR;
 
 namespace CelsoGuitars.Application.Cliente.Handler.Command
 {
-    public class ValidarLoginClienteCommand : IRequest<ValidarLoginClienteCommandResponse>
-    {
-        public ClienteLoginInputDTO Cliente { get; set; }
-
-        public ValidarLoginClienteCommand(ClienteLoginInputDTO cliente)
-        {
-            Cliente = cliente;
-        }
-    }
-
-    public class ValidarLoginClienteCommandResponse
-    {
-        public ClienteLoginOutputDTO Cliente { get; set; }
-
-        public ValidarLoginClienteCommandResponse(ClienteLoginOutputDTO cliente)
-        {
-            Cliente = cliente;
-        }
-    }
-
     public class CriarClienteCommand : IRequest<CriarClienteCommandResponse>
     {
         public ClienteInputDTO Cliente { get; set; }

@@ -1,8 +1,8 @@
-﻿using CelsoGuitars.Domain.Cliente.ValueObject;
+﻿using CelsoGuitars.Domain.Usuario.ValueObject;
 using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace CelsoGuitars.Domain.Cliente.Rules
+namespace CelsoGuitars.Domain.Usuario.Rules
 {
     public class ValidadorSenha : AbstractValidator<Senha>
     {

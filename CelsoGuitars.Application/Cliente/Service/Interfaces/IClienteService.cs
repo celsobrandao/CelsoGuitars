@@ -8,7 +8,6 @@ namespace CelsoGuitars.Application.Cliente.Service.Interfaces
         Task<ClienteOutputDTO> Criar(ClienteInputDTO dto);
         Task<ClienteOutputDTO> Atualizar(ClienteUpdateDTO dto);
         Task Remover(Guid clienteID);
-        Task<ClienteLoginOutputDTO> ValidarLogin(ClienteLoginInputDTO dto);
         Task<ClienteModel> Obter(Guid clienteID);
         Task<List<ClienteOutputDTO>> ObterTodos();
     }

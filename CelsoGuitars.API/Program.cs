@@ -5,6 +5,7 @@ using CelsoGuitars.Domain.Fornecedor.Repository;
 using CelsoGuitars.Domain.Guitarra.Repository;
 using CelsoGuitars.Domain.Guitarra.Repository.Parte;
 using CelsoGuitars.Domain.Servico.Repository;
+using CelsoGuitars.Domain.Usuario.Repository;
 using CelsoGuitars.Infra.Repository;
 using CelsoGuitars.Infra.Storage;
 using CelsoGuitars.Infra.Storage.Interfaces;
@@ -16,6 +17,7 @@ using CelsoGuitars.Repository.Repository.Fornecedor;
 using CelsoGuitars.Repository.Repository.Guitarra;
 using CelsoGuitars.Repository.Repository.Guitarra.Parte;
 using CelsoGuitars.Repository.Repository.Servico;
+using CelsoGuitars.Repository.Repository.Usuario;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +64,10 @@ builder.Services.AddScoped<IGuitarraRepository, GuitarraRepository>();
 #region Serviço
 builder.Services.AddScoped<IOrdemServicoRepository, OrdemServicoRepository>();
 builder.Services.AddScoped<ITipoServicoRepository, TipoServicoRepository>();
+#endregion
+
+#region Usuario
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 #endregion
 
 builder.Services.AddScoped<IStorage, Storage>();

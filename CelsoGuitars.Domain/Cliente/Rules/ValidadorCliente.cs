@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CelsoGuitars.Domain.Rules;
+using FluentValidation;
 using ClienteModel = CelsoGuitars.Domain.Cliente.Cliente;
 
 namespace CelsoGuitars.Domain.Cliente.Rules
@@ -9,7 +10,6 @@ namespace CelsoGuitars.Domain.Cliente.Rules
         {
             RuleFor(x => x.Nome).NotEmpty();
             RuleFor(x => x.Email).SetValidator(new ValidadorEmail());
-            RuleFor(x => x.Senha).SetValidator(new ValidadorSenha());
         }
     }
 }

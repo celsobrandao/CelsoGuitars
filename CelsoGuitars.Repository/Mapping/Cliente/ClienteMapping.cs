@@ -23,14 +23,6 @@ namespace CelsoGuitars.Repository.Mapping.Cliente
                     .HasMaxLength(100);
             });
 
-            builder.OwnsOne(x => x.Senha, p =>
-            {
-                p.Property(f => f.Valor)
-                    .HasColumnName("Senha")
-                    .IsRequired()
-                    .HasMaxLength(200);
-            });
-
             builder.Property(x => x.Nome)
                 .IsRequired()
                 .HasMaxLength(200);

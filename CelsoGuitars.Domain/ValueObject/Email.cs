@@ -1,4 +1,4 @@
-﻿namespace CelsoGuitars.Domain.Cliente.ValueObject
+﻿namespace CelsoGuitars.Domain.ValueObject
 {
     public class Email
     {
