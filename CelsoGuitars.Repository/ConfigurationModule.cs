@@ -3,7 +3,6 @@ using CelsoGuitars.Domain.Fornecedor.Repository;
 using CelsoGuitars.Domain.Guitarra.Repository;
 using CelsoGuitars.Domain.Guitarra.Repository.Parte;
 using CelsoGuitars.Domain.Servico.Repository;
-using CelsoGuitars.Domain.Usuario.Repository;
 using CelsoGuitars.Repository.Context;
 using CelsoGuitars.Repository.Database;
 using CelsoGuitars.Repository.Repository.Cliente;
@@ -11,7 +10,6 @@ using CelsoGuitars.Repository.Repository.Fornecedor;
 using CelsoGuitars.Repository.Repository.Guitarra;
 using CelsoGuitars.Repository.Repository.Guitarra.Parte;
 using CelsoGuitars.Repository.Repository.Servico;
-using CelsoGuitars.Repository.Repository.Usuario;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,10 +51,6 @@ namespace CelsoGuitars.Repository
             #region Serviço
             services.AddScoped<IOrdemServicoRepository, OrdemServicoRepository>();
             services.AddScoped<ITipoServicoRepository, TipoServicoRepository>();
-            #endregion
-
-            #region Usuário
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             #endregion
 
             return services;

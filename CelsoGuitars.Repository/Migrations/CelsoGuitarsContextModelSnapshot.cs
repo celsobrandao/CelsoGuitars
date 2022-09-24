@@ -542,25 +542,6 @@ namespace CelsoGuitars.Repository.Migrations
                     b.ToTable("TiposServicos", (string)null);
                 });
 
-            modelBuilder.Entity("CelsoGuitars.Domain.Usuario.Usuario", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Usuarios", (string)null);
-                });
-
             modelBuilder.Entity("ChaveamentoGuitarra", b =>
                 {
                     b.Property<Guid>("ChaveamentosID")
@@ -815,51 +796,6 @@ namespace CelsoGuitars.Repository.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Guitarra");
-                });
-
-            modelBuilder.Entity("CelsoGuitars.Domain.Usuario.Usuario", b =>
-                {
-                    b.OwnsOne("CelsoGuitars.Domain.ValueObject.Email", "Email", b1 =>
-                        {
-                            b1.Property<Guid>("UsuarioID")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Valor")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("UsuarioID");
-
-                            b1.ToTable("Usuarios");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UsuarioID");
-                        });
-
-                    b.OwnsOne("CelsoGuitars.Domain.Usuario.ValueObject.Senha", "Senha", b1 =>
-                        {
-                            b1.Property<Guid>("UsuarioID")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Valor")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("Senha");
-
-                            b1.HasKey("UsuarioID");
-
-                            b1.ToTable("Usuarios");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UsuarioID");
-                        });
-
-                    b.Navigation("Email");
-
-                    b.Navigation("Senha");
                 });
 
             modelBuilder.Entity("ChaveamentoGuitarra", b =>

@@ -15,7 +15,6 @@ namespace CelsoGuitars.Repository.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Senha = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -43,7 +42,7 @@ namespace CelsoGuitars.Repository.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
-                    Valor = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(6,2)", precision: 6, scale: 2, nullable: false),
                     MinutosExecucao = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -58,7 +57,7 @@ namespace CelsoGuitars.Repository.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TipoCaptador = table.Column<byte>(type: "tinyint", nullable: false),
                     TipoCaptadorOutro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Resistencia = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
+                    Resistencia = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
                     CorCaptador = table.Column<byte>(type: "tinyint", nullable: false),
                     CorCaptadorOutro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     MarcaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -195,11 +194,11 @@ namespace CelsoGuitars.Repository.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MadeiraBracoID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MadeiraEscalaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ComprimentoEscala = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
+                    ComprimentoEscala = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
                     QuantidadeTrastes = table.Column<byte>(type: "tinyint", nullable: false),
                     Formato = table.Column<byte>(type: "tinyint", nullable: false),
                     FormatoOutro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    RaioEscala = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
+                    RaioEscala = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
                     JuncaoBraco = table.Column<byte>(type: "tinyint", nullable: false),
                     JuncaoBracoOutro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     MarcaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -279,10 +278,10 @@ namespace CelsoGuitars.Repository.Migrations
                     TarraxaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TrasteID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Foto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    MarcaID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoFabricante = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MarcaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    CodigoFabricante = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -303,7 +302,8 @@ namespace CelsoGuitars.Repository.Migrations
                         name: "FK_Guitarras_Marcas_MarcaID",
                         column: x => x.MarcaID,
                         principalTable: "Marcas",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitarras_Pontes_PonteID",
                         column: x => x.PonteID,
@@ -383,9 +383,9 @@ namespace CelsoGuitars.Repository.Migrations
                     DataInicioServico = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataSaidaPrevista = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataSaidaEfetiva = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ValorPrevisto = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
-                    PercentualDesconto = table.Column<decimal>(type: "decimal(4,2)", precision: 4, nullable: false),
-                    ValorEfetivo = table.Column<decimal>(type: "decimal(2,2)", precision: 2, nullable: false),
+                    ValorPrevisto = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    PercentualDesconto = table.Column<decimal>(type: "decimal(5,4)", precision: 5, scale: 4, nullable: false),
+                    ValorEfetivo = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: true),
                     Observacoes = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true)
                 },
                 constraints: table =>

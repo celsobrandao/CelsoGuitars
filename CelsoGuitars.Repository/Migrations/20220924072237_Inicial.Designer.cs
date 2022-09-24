@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CelsoGuitars.Repository.Migrations
 {
     [DbContext(typeof(CelsoGuitarsContext))]
-    [Migration("20220923035227_Atualizacao_20220923_1")]
-    partial class Atualizacao_20220923_1
+    [Migration("20220924072237_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,8 +153,8 @@ namespace CelsoGuitars.Repository.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("ComprimentoEscala")
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(4, 2)
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(4000)
@@ -192,8 +192,8 @@ namespace CelsoGuitars.Repository.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("RaioEscala")
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(4, 2)
+                        .HasColumnType("decimal(4,2)");
 
                     b.HasKey("ID");
 
@@ -237,8 +237,8 @@ namespace CelsoGuitars.Repository.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("Resistencia")
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(4, 2)
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<byte>("TipoCaptador")
                         .HasColumnType("tinyint");
@@ -497,17 +497,16 @@ namespace CelsoGuitars.Repository.Migrations
                         .HasColumnType("nvarchar(4000)");
 
                     b.Property<decimal>("PercentualDesconto")
-                        .HasPrecision(4)
-                        .HasColumnType("decimal(4,2)");
+                        .HasPrecision(5, 4)
+                        .HasColumnType("decimal(5,4)");
 
                     b.Property<decimal?>("ValorEfetivo")
-                        .IsRequired()
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
 
                     b.Property<decimal>("ValorPrevisto")
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
 
                     b.HasKey("ID");
 
@@ -537,8 +536,8 @@ namespace CelsoGuitars.Repository.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("Valor")
-                        .HasPrecision(2)
-                        .HasColumnType("decimal(2,2)");
+                        .HasPrecision(6, 2)
+                        .HasColumnType("decimal(6,2)");
 
                     b.HasKey("ID");
 
@@ -592,7 +591,7 @@ namespace CelsoGuitars.Repository.Migrations
 
             modelBuilder.Entity("CelsoGuitars.Domain.Cliente.Cliente", b =>
                 {
-                    b.OwnsOne("CelsoGuitars.Domain.Cliente.ValueObject.Email", "Email", b1 =>
+                    b.OwnsOne("CelsoGuitars.Domain.ValueObject.Email", "Email", b1 =>
                         {
                             b1.Property<Guid>("ClienteID")
                                 .HasColumnType("uniqueidentifier");
@@ -611,28 +610,7 @@ namespace CelsoGuitars.Repository.Migrations
                                 .HasForeignKey("ClienteID");
                         });
 
-                    b.OwnsOne("CelsoGuitars.Domain.Cliente.ValueObject.Senha", "Senha", b1 =>
-                        {
-                            b1.Property<Guid>("ClienteID")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Valor")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("Senha");
-
-                            b1.HasKey("ClienteID");
-
-                            b1.ToTable("Clientes");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClienteID");
-                        });
-
                     b.Navigation("Email");
-
-                    b.Navigation("Senha");
                 });
 
             modelBuilder.Entity("CelsoGuitars.Domain.Guitarra.Guitarra", b =>
