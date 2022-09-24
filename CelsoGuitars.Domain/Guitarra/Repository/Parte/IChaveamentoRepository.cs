@@ -5,5 +5,6 @@ namespace CelsoGuitars.Domain.Guitarra.Repository.Parte
 {
     public interface IChaveamentoRepository : IRepository<Chaveamento>
     {
+        Task<List<Chaveamento>> GetAllCompleto();
     }
 }

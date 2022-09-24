@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using CelsoGuitars.Application.Fornecedor.Service.Interfaces;
 using CelsoGuitars.Application.Guitarra.DTO;
 using CelsoGuitars.Application.Guitarra.Service.Interfaces;
 using CelsoGuitars.Domain.Guitarra.Repository;
-using CelsoGuitars.Domain.Guitarra.Repository.Parte;
 using CelsoGuitars.Infra.Storage.Interfaces;
 using GuitarraModel = CelsoGuitars.Domain.Guitarra.Guitarra;
 
@@ -11,38 +11,20 @@ namespace CelsoGuitars.Application.Guitarra.Service
     public class GuitarraService : IGuitarraService
     {
         private readonly IGuitarraRepository _guitarraRepository;
-        private readonly IBracoRepository _bracoRepository;
-        private readonly ICaptadorRepository _captadorRepository;
-        private readonly IChaveamentoRepository _chaveamentoRepository;
-        private readonly ICorpoRepository _corpoRepository;
-        private readonly IMadeiraRepository _madeiraRepository;
-        private readonly IPonteRepository _ponteRepository;
-        private readonly ITarraxaRepository _tarraxaRepository;
-        private readonly ITrasteRepository _trasteRepository;
+        private readonly IParteService _parteService;
+        private readonly IMarcaService _marcaService;
         private readonly IMapper _mapper;
         private readonly IStorage _storage;
 
         public GuitarraService(IGuitarraRepository guitarraRepository,
-                               IBracoRepository bracoRepository,
-                               ICaptadorRepository captadorRepository,
-                               IChaveamentoRepository chaveamentoRepository,
-                               ICorpoRepository corpoRepository,
-                               IMadeiraRepository madeiraRepository,
-                               IPonteRepository ponteRepository,
-                               ITarraxaRepository tarraxaRepository,
-                               ITrasteRepository trasteRepository,
+                               IParteService parteService,
+                               IMarcaService marcaService,
                                IMapper mapper,
                                IStorage storage)
         {
             _guitarraRepository = guitarraRepository;
-            _bracoRepository = bracoRepository;
-            _captadorRepository = captadorRepository;
-            _chaveamentoRepository = chaveamentoRepository;
-            _corpoRepository = corpoRepository;
-            _madeiraRepository = madeiraRepository;
-            _ponteRepository = ponteRepository;
-            _tarraxaRepository = tarraxaRepository;
-            _trasteRepository = trasteRepository;
+            _parteService = parteService;
+            _marcaService = marcaService;
             _mapper = mapper;
             _storage = storage;
         }
@@ -51,23 +33,24 @@ namespace CelsoGuitars.Application.Guitarra.Service
         {
             var guitarra = _mapper.Map<GuitarraModel>(dto);
 
-            guitarra.Braco = await _bracoRepository.Get(dto.BracoID);
-            guitarra.Corpo = await _corpoRepository.Get(dto.CorpoID);
-            guitarra.Ponte = await _ponteRepository.Get(dto.PonteID);
-            guitarra.Tarraxa = await _tarraxaRepository.Get(dto.TarraxaID);
-            guitarra.Traste = await _trasteRepository.Get(dto.TrasteID);
+            guitarra.Braco = await _parteService.GetBraco(dto.BracoID);
+            guitarra.Corpo = await _parteService.GetCorpo(dto.CorpoID);
+            guitarra.Ponte = await _parteService.GetPonte(dto.PonteID);
+            guitarra.Tarraxa = await _parteService.GetTarraxa(dto.TarraxaID);
+            guitarra.Traste = await _parteService.GetTraste(dto.TrasteID);
 
             guitarra.Captadores = new();
             foreach (var captador in dto.CaptadoresIDs)
             {
-                guitarra.Captadores.Add(await _captadorRepository.Get(captador));
+                guitarra.Captadores.Add(await _parteService.GetCaptador(captador));
             }
 
             guitarra.Chaveamentos = new();
-            foreach (var chaveamento in dto.ChaveamentoIDs)
+            foreach (var chaveamento in dto.ChaveamentosIDs)
             {
-                guitarra.Chaveamentos.Add(await _chaveamentoRepository.Get(chaveamento));
+                guitarra.Chaveamentos.Add(await _parteService.GetChaveamento(chaveamento));
             }
+            guitarra.Marca = await _marcaService.Obter(dto.MarcaID);
 
             guitarra.Foto = await _storage.Upload(dto.FotoUrl);
 
@@ -80,25 +63,55 @@ namespace CelsoGuitars.Application.Guitarra.Service
 
         public async Task<GuitarraOutputDTO> Atualizar(GuitarraUpdateDTO dto)
         {
-            var guitarra = _mapper.Map<GuitarraModel>(dto);
+            var guitarra = await _guitarraRepository.GetByIDCompleto(dto.ID);
 
-            guitarra.Braco = await _bracoRepository.Get(dto.BracoID);
-            guitarra.Corpo = await _corpoRepository.Get(dto.CorpoID);
-            guitarra.Ponte = await _ponteRepository.Get(dto.PonteID);
-            guitarra.Tarraxa = await _tarraxaRepository.Get(dto.TarraxaID);
-            guitarra.Traste = await _trasteRepository.Get(dto.TrasteID);
+            guitarra.CodigoFabricante = dto.CodigoFabricante;
+            guitarra.ConfiguracaoCaptadores = dto.ConfiguracaoCaptadores;
+            guitarra.ConfiguracaoCaptadoresOutro = dto.ConfiguracaoCaptadoresOutro;
+            guitarra.Descricao = dto.Descricao;
+            guitarra.Nome = dto.Nome;
 
-            guitarra.Captadores = new();
-            foreach (var captador in dto.CaptadoresIDs)
+            guitarra.Braco = await _parteService.GetBraco(dto.BracoID);
+            guitarra.Corpo = await _parteService.GetCorpo(dto.CorpoID);
+            guitarra.Ponte = await _parteService.GetPonte(dto.PonteID);
+            guitarra.Tarraxa = await _parteService.GetTarraxa(dto.TarraxaID);
+            guitarra.Traste = await _parteService.GetTraste(dto.TrasteID);
+
+            //Remove captadores
+            for (int i = guitarra.Captadores.Count - 1; i >= 0; i--)
             {
-                guitarra.Captadores.Add(await _captadorRepository.Get(captador));
+                if (!dto.CaptadoresIDs.Contains(guitarra.Captadores[i].ID))
+                {
+                    guitarra.Captadores.RemoveAt(i);
+                }
+            }
+            //Inclui captadores
+            foreach (var captadorID in dto.CaptadoresIDs)
+            {
+                if (!guitarra.Captadores.Any(c => c.ID == captadorID))
+                {
+                    guitarra.Captadores.Add(await _parteService.GetCaptador(captadorID));
+                }
             }
 
-            guitarra.Chaveamentos = new();
-            foreach (var chaveamento in dto.ChaveamentoIDs)
+            //Remove chaveamentos
+            for (int i = guitarra.Chaveamentos.Count - 1; i >= 0; i--)
             {
-                guitarra.Chaveamentos.Add(await _chaveamentoRepository.Get(chaveamento));
+                if (!dto.ChaveamentosIDs.Contains(guitarra.Chaveamentos[i].ID))
+                {
+                    guitarra.Chaveamentos.RemoveAt(i);
+                }
             }
+            //Inclui chaveamentos
+            foreach (var chaveamentoID in dto.ChaveamentosIDs)
+            {
+                if (!guitarra.Chaveamentos.Any(c => c.ID == chaveamentoID))
+                {
+                    guitarra.Chaveamentos.Add(await _parteService.GetChaveamento(chaveamentoID));
+                }
+            }
+
+            guitarra.Marca = await _marcaService.Obter(dto.MarcaID);
 
             guitarra.Foto = await _storage.Upload(dto.FotoUrl);
 
@@ -118,7 +131,7 @@ namespace CelsoGuitars.Application.Guitarra.Service
 
         public async Task<List<GuitarraOutputDTO>> ObterTodos()
         {
-            var result = await _guitarraRepository.GetAll();
+            var result = await _guitarraRepository.GetAllCompleto();
 
             return _mapper.Map<List<GuitarraOutputDTO>>(result);
         }

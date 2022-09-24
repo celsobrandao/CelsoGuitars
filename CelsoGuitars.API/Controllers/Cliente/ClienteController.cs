@@ -32,7 +32,7 @@ namespace CelsoGuitars.API.Controllers.Cliente
 
             if (result.Cliente.Valido)
             {
-                return Ok($"Bearer Token: {GenerateToken(configuration, result.Cliente.ID.Value)}");
+                return Ok($"Bearer {GenerateToken(configuration, result.Cliente.ID.Value)}");
             }
             else
             {

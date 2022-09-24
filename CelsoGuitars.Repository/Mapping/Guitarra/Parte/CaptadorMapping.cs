@@ -23,7 +23,7 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.Property(x => x.Resistencia)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(4, 2);
 
             builder.Property(x => x.CorCaptador)
                 .IsRequired();

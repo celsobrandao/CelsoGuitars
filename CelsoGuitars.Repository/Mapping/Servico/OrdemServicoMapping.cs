@@ -36,15 +36,15 @@ namespace CelsoGuitars.Repository.Mapping.Servico
 
             builder.Property(x => x.ValorPrevisto)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(7, 2);
 
             builder.Property(x => x.PercentualDesconto)
                 .IsRequired()
-                .HasPrecision(4);
+                .HasPrecision(5, 4);
 
             builder.Property(x => x.ValorEfetivo)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(7, 2);
 
             builder.Property(x => x.Observacoes)
                 .HasMaxLength(4000);

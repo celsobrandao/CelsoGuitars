@@ -5,5 +5,6 @@ namespace CelsoGuitars.Domain.Guitarra.Repository.Parte
 {
     public interface ICaptadorRepository : IRepository<Captador>
     {
+        Task<List<Captador>> GetAllCompleto();
     }
 }

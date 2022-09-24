@@ -28,6 +28,7 @@ namespace CelsoGuitars.Application
 
             #region Guitarra
             services.AddScoped<IGuitarraService, GuitarraService>();
+            services.AddScoped<IParteService, ParteService>();
             #endregion
 
             #region Serviço

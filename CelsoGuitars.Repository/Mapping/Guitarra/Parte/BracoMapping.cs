@@ -27,7 +27,7 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.Property(x => x.ComprimentoEscala)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(4, 2);
 
             builder.Property(x => x.QuantidadeTrastes)
                 .IsRequired();
@@ -40,7 +40,7 @@ namespace CelsoGuitars.Repository.Mapping.Guitarra.Parte
 
             builder.Property(x => x.RaioEscala)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(4, 2);
 
             builder.Property(x => x.JuncaoBraco)
                 .IsRequired();

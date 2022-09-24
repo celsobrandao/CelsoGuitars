@@ -8,13 +8,17 @@ namespace CelsoGuitars.Application.Guitarra.Handler
     public class GuitarraHandler : IRequestHandler<CriarGuitarraCommand, CriarGuitarraCommandResponse>,
                                    IRequestHandler<AtualizarGuitarraCommand, AtualizarGuitarraCommandResponse>,
                                    IRequestHandler<RemoverGuitarraCommand, RemoverGuitarraCommandResponse>,
-                                   IRequestHandler<GetAllGuitarraQuery, GetAllGuitarraQueryResponse>
+                                   IRequestHandler<GetAllGuitarraQuery, GetAllGuitarraQueryResponse>,
+                                   IRequestHandler<GetAllPartesQuery, GetAllPartesQueryResponse>
     {
         private readonly IGuitarraService _guitarraService;
+        private readonly IParteService _parteService;
 
-        public GuitarraHandler(IGuitarraService guitarraService)
+        public GuitarraHandler(IGuitarraService guitarraService,
+                               IParteService parteService)
         {
             _guitarraService = guitarraService;
+            _parteService = parteService;
         }
 
         public async Task<CriarGuitarraCommandResponse> Handle(CriarGuitarraCommand request, CancellationToken cancellationToken)
@@ -43,6 +47,13 @@ namespace CelsoGuitars.Application.Guitarra.Handler
             var result = await _guitarraService.ObterTodos();
 
             return new GetAllGuitarraQueryResponse(result);
+        }
+
+        public async Task<GetAllPartesQueryResponse> Handle(GetAllPartesQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _parteService.ObterTodos();
+
+            return new GetAllPartesQueryResponse(result);
         }
     }
 }

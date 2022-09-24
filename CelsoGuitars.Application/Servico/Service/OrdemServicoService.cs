@@ -44,6 +44,13 @@ namespace CelsoGuitars.Application.Servico.Service
             return _mapper.Map<OrdemServicoOutputDTO>(ordemServico);
         }
 
+        public async Task<List<OrdemServicoOutputDTO>> ObterPorCliente(Guid clienteID)
+        {
+            var ordensServicos = await _ordemServicoRepository.GetCompletoByCliente(clienteID);
+
+            return _mapper.Map<List<OrdemServicoOutputDTO>>(ordensServicos);
+        }
+
         public async Task<OrdemServicoOutputDTO> Finalizar(OrdemServicoFinalizarInputDTO dto)
         {
             var ordemServico = await _ordemServicoRepository.Get(dto.ID);

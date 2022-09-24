@@ -18,10 +18,16 @@ namespace CelsoGuitars.API.Controllers.Servico
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetAll")]
         public async Task<IActionResult> Get()
         {
             return Ok(await _mediator.Send(new GetAllOrdemServicoQuery()));
+        }
+
+        [HttpGet, Route("GetAllCliente")]
+        public async Task<IActionResult> GetAllCliente(Guid clienteID)
+        {
+            return Ok(await _mediator.Send(new GetByClienteOrdemServicoCommand(clienteID)));
         }
 
         [HttpPost]

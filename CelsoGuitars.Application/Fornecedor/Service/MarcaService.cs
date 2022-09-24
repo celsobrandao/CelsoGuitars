@@ -47,6 +47,11 @@ namespace CelsoGuitars.Application.Fornecedor.Service
             await _marcaRepository.Delete(marca);
         }
 
+        public Task<Marca> Obter(Guid marcaID)
+        {
+            return _marcaRepository.Get(marcaID);
+        }
+
         public async Task<List<MarcaOutputDTO>> ObterTodos()
         {
             var result = await _marcaRepository.GetAll();

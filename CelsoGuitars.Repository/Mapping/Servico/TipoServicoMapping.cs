@@ -24,7 +24,7 @@ namespace CelsoGuitars.Repository.Mapping.Servico
 
             builder.Property(x => x.Valor)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(6, 2);
 
             builder.Property(x => x.MinutosExecucao)
                 .IsRequired();

@@ -5,5 +5,6 @@ namespace CelsoGuitars.Domain.Guitarra.Repository.Parte
 {
     public interface IBracoRepository : IRepository<Braco>
     {
+        Task<List<Braco>> GetAllCompleto();
     }
 }

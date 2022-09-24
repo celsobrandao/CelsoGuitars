@@ -7,6 +7,8 @@ namespace CelsoGuitars.Application.Servico.Handler
 {
     public class OrdemServicoHandler : IRequestHandler<CriarOrdemServicoCommand, CriarOrdemServicoCommandResponse>,
                                        IRequestHandler<AtualizarOrdemServicoCommand, AtualizarOrdemServicoCommandResponse>,
+                                       IRequestHandler<GetByClienteOrdemServicoCommand, GetByClienteOrdemServicoCommandResponse>,
+                                       IRequestHandler<FinalizarOrdemServicoCommand, FinalizarOrdemServicoCommandResponse>,
                                        IRequestHandler<RemoverOrdemServicoCommand, RemoverOrdemServicoCommandResponse>,
                                        IRequestHandler<GetAllOrdemServicoQuery, GetAllOrdemServicoQueryResponse>
     {
@@ -29,6 +31,20 @@ namespace CelsoGuitars.Application.Servico.Handler
             var result = await _ordemServicoService.Atualizar(request.OrdemServico);
 
             return new AtualizarOrdemServicoCommandResponse(result);
+        }
+
+        public async Task<GetByClienteOrdemServicoCommandResponse> Handle(GetByClienteOrdemServicoCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _ordemServicoService.ObterPorCliente(request.ClienteID);
+
+            return new GetByClienteOrdemServicoCommandResponse(result);
+        }
+
+        public async Task<FinalizarOrdemServicoCommandResponse> Handle(FinalizarOrdemServicoCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _ordemServicoService.Finalizar(request.OrdemServico);
+
+            return new FinalizarOrdemServicoCommandResponse(result);
         }
 
         public async Task<RemoverOrdemServicoCommandResponse> Handle(RemoverOrdemServicoCommand request, CancellationToken cancellationToken)
