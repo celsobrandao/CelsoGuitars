@@ -12,9 +12,49 @@ namespace CelsoGuitars.Repository.Repository.Servico
         {
         }
 
+        public Task<OrdemServico> GetByIDCompleto(Guid ordemServicoID)
+        {
+            return DbSet
+                        .Include(x => x.Cliente)
+                        .Include(x => x.TiposServicos)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Braco)
+                                .ThenInclude(x => x.MadeiraBraco)
+                                    .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Braco)
+                                .ThenInclude(x => x.MadeiraEscala)
+                                    .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Corpo)
+                                .ThenInclude(x => x.MadeiraCorpo)
+                                    .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Corpo)
+                                .ThenInclude(x => x.MadeiraTopo)
+                                    .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Captadores)
+                                .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Chaveamentos)
+                                .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Ponte)
+                                .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Tarraxa)
+                                .ThenInclude(x => x.Marca)
+                        .Include(x => x.Guitarra)
+                            .ThenInclude(x => x.Traste)
+                                .ThenInclude(x => x.Marca)
+                        .SingleAsync(x => x.ID == ordemServicoID);
+        }
+
         public Task<List<OrdemServico>> GetCompletoByCliente(Guid clienteID)
         {
             return DbSet
+                        .Include(x => x.Cliente)
                         .Include(x => x.TiposServicos)
                         .Include(x => x.Guitarra)
                             .ThenInclude(x => x.Braco)

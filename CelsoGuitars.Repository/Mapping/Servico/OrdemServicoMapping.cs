@@ -43,7 +43,6 @@ namespace CelsoGuitars.Repository.Mapping.Servico
                 .HasPrecision(5, 4);
 
             builder.Property(x => x.ValorEfetivo)
-                .IsRequired()
                 .HasPrecision(7, 2);
 
             builder.Property(x => x.Observacoes)

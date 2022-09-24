@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CelsoGuitars.Application.Cliente.Service.Interfaces;
+using CelsoGuitars.Application.Guitarra.Service.Interfaces;
 using CelsoGuitars.Application.Servico.DTO;
 using CelsoGuitars.Application.Servico.Service.Interfaces;
 using CelsoGuitars.Domain.Servico;
@@ -9,18 +11,36 @@ namespace CelsoGuitars.Application.Servico.Service
     public class OrdemServicoService : IOrdemServicoService
     {
         private readonly IOrdemServicoRepository _ordemServicoRepository;
+        private readonly IClienteService _clienteService;
+        private readonly IGuitarraService _guitarraService;
+        private readonly ITipoServicoService _tipoServicoService;
         private readonly IMapper _mapper;
 
         public OrdemServicoService(IOrdemServicoRepository ordemServicoRepository,
+                                   IClienteService clienteService,
+                                   IGuitarraService guitarraService,
+                                   ITipoServicoService tipoServicoService,
                                    IMapper mapper)
         {
             _ordemServicoRepository = ordemServicoRepository;
+            _clienteService = clienteService;
+            _guitarraService = guitarraService;
+            _tipoServicoService = tipoServicoService;
             _mapper = mapper;
         }
 
         public async Task<OrdemServicoOutputDTO> Criar(OrdemServicoInputDTO dto)
         {
             var ordemServico = _mapper.Map<OrdemServico>(dto);
+
+            ordemServico.Cliente = await _clienteService.Obter(dto.ClienteID);
+            ordemServico.Guitarra = await _guitarraService.Obter(dto.GuitarraID);
+
+            ordemServico.TiposServicos = new();
+            foreach (var tipoServico in dto.TiposServicosIDs)
+            {
+                ordemServico.TiposServicos.Add(await _tipoServicoService.Obter(tipoServico));
+            }
 
             ordemServico.Calcular();
 
@@ -33,7 +53,32 @@ namespace CelsoGuitars.Application.Servico.Service
 
         public async Task<OrdemServicoOutputDTO> Atualizar(OrdemServicoUpdateDTO dto)
         {
-            var ordemServico = _mapper.Map<OrdemServico>(dto);
+            var ordemServico = await _ordemServicoRepository.GetByIDCompleto(dto.ID);
+
+            ordemServico.DataEntrada = dto.DataEntrada;
+            ordemServico.DataInicioServico = dto.DataInicioServico;
+            ordemServico.PercentualDesconto = dto.PercentualDesconto;
+            ordemServico.Observacoes = dto.Observacoes;
+
+            ordemServico.Cliente = await _clienteService.Obter(dto.ClienteID);
+            ordemServico.Guitarra = await _guitarraService.Obter(dto.GuitarraID);
+
+            //Remove tipos de serviços
+            for (int i = ordemServico.TiposServicos.Count - 1; i >= 0; i--)
+            {
+                if (!dto.TiposServicosIDs.Contains(ordemServico.TiposServicos[i].ID))
+                {
+                    ordemServico.TiposServicos.RemoveAt(i);
+                }
+            }
+            //Inclui tipos de serviços
+            foreach (var tipoServicoID in dto.TiposServicosIDs)
+            {
+                if (!ordemServico.TiposServicos.Any(ts => ts.ID == tipoServicoID))
+                {
+                    ordemServico.TiposServicos.Add(await _tipoServicoService.Obter(tipoServicoID));
+                }
+            }
 
             ordemServico.Calcular();
 

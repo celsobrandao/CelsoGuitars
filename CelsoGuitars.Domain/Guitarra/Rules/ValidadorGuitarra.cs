@@ -1,5 +1,4 @@
-﻿using CelsoGuitars.Domain.Fornecedor.Rules;
-using FluentValidation;
+﻿using FluentValidation;
 using GuitarraModel = CelsoGuitars.Domain.Guitarra.Guitarra;
 
 namespace CelsoGuitars.Domain.Guitarra.Rules
@@ -8,7 +7,7 @@ namespace CelsoGuitars.Domain.Guitarra.Rules
     {
         public ValidadorGuitarra()
         {
-            RuleFor(x => x.Marca).NotNull().SetValidator(new ValidadorMarca());
+            RuleFor(x => x.Marca).NotNull();
             RuleFor(x => x.Nome).NotEmpty();
             RuleFor(x => x.CodigoFabricante).NotEmpty();
             RuleFor(x => x.Braco).NotNull();

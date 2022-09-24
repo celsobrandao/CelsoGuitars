@@ -12,13 +12,6 @@
         Outro = byte.MaxValue
     }
 
-    public enum ResistenciaChaveamentoEnum : byte
-    {
-        K250 = 0,
-        K500 = 1,
-        M1 = 2
-    }
-
     public class Chaveamento : ParteBase
     {
         public TipoChaveamentoEnum TipoChaveamento { get; set; }

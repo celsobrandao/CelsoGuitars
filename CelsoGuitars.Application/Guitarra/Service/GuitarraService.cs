@@ -129,6 +129,11 @@ namespace CelsoGuitars.Application.Guitarra.Service
             await _guitarraRepository.Delete(guitarra);
         }
 
+        public Task<GuitarraModel> Obter(Guid guitarraID)
+        {
+            return _guitarraRepository.Get(guitarraID);
+        }
+
         public async Task<List<GuitarraOutputDTO>> ObterTodos()
         {
             var result = await _guitarraRepository.GetAllCompleto();

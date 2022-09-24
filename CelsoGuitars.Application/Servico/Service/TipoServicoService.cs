@@ -46,6 +46,11 @@ namespace CelsoGuitars.Application.Servico.Service
             await _tipoServicoRepository.Delete(tipoServico);
         }
 
+        public Task<TipoServico> Obter(Guid tipoServicoID)
+        {
+            return _tipoServicoRepository.Get(tipoServicoID);
+        }
+
         public async Task<List<TipoServicoOutputDTO>> ObterTodos()
         {
             var result = await _tipoServicoRepository.GetAll();

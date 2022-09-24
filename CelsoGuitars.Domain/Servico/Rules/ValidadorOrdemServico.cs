@@ -1,6 +1,4 @@
-﻿using CelsoGuitars.Domain.Cliente.Rules;
-using CelsoGuitars.Domain.Guitarra.Rules;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace CelsoGuitars.Domain.Servico.Rules
 {
@@ -8,8 +6,8 @@ namespace CelsoGuitars.Domain.Servico.Rules
     {
         public ValidadorOrdemServico()
         {
-            RuleFor(x => x.Cliente).NotNull().SetValidator(new ValidadorCliente());
-            RuleFor(x => x.Guitarra).NotNull().SetValidator(new ValidadorGuitarra());
+            RuleFor(x => x.Cliente).NotNull();
+            RuleFor(x => x.Guitarra).NotNull();
             RuleFor(x => x.DataEntrada).GreaterThan(DateTime.MinValue);
             RuleFor(x => x.DataInicioServico).GreaterThan(DateTime.MinValue);
             RuleFor(x => x.DataSaidaPrevista).GreaterThan(DateTime.MinValue);

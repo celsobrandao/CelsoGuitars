@@ -62,6 +62,11 @@ namespace CelsoGuitars.Application.Cliente.Service
             return new ClienteLoginOutputDTO(valido, mensagem, id);
         }
 
+        public Task<ClienteModel> Obter(Guid clienteID)
+        {
+            return _clienteRepository.Get(clienteID);
+        }
+
         public async Task<List<ClienteOutputDTO>> ObterTodos()
         {
             var result = await _clienteRepository.GetAll();
